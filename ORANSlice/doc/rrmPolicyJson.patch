@@ -1,0 +1,47 @@
+diff --git a/oai_ran/openair2/LAYER2/NR_MAC_gNB/gNB_scheduler_dlsch.c b/oai_ran/openair2/LAYER2/NR_MAC_gNB/gNB_scheduler_dlsch.c
+index 3e6ad1c3f6..43664c6e23 100644
+--- a/oai_ran/openair2/LAYER2/NR_MAC_gNB/gNB_scheduler_dlsch.c
++++ b/oai_ran/openair2/LAYER2/NR_MAC_gNB/gNB_scheduler_dlsch.c
+@@ -1598,8 +1598,8 @@ static void nr_fr1_dlsch_preprocessor(module_id_t module_id, frame_t frame, sub_
+   nr_slice_preprocess(module_id, frame, slot);
+ 
+   // Slice policy update
+-  // if ((frame & 127) == 0 && slot == 0)
+-  //   nr_update_slice_policy(module_id);
++  if ((frame & 127) == 0 && slot == 0)
++    nr_update_slice_policy(module_id);
+ 
+   int bw = scc->downlinkConfigCommon->frequencyInfoDL->scs_SpecificCarrierList.list.array[0]->carrierBandwidth;
+   int average_agg_level = 4; // TODO find a better estimation
+
+diff --git a/oai_ran/rrmPolicy.json b/oai_ran/rrmPolicy.json
+new file mode 100644
+index 0000000000..967f609477
+--- /dev/null
++++ b/oai_ran/rrmPolicy.json
+@@ -0,0 +1,25 @@
++{
++	"rrmPolicyRatio" :
++	[
++		{
++			"sst":1,
++			"dedicated_ratio":5,
++			"min_ratio":10,
++			"max_ratio":100
++		},
++		{
++			"sst":1,
++			"sd":1,
++			"dedicated_ratio":5,
++			"min_ratio":10,
++			"max_ratio":100
++		},
++		{
++			"sst":1,
++			"sd":2,
++			"dedicated_ratio":5,
++			"min_ratio":10,
++			"max_ratio":100
++		}
++	]
++}

@@ -1,0 +1,3 @@
+[submodule "oai_ran/ext/simde"]
+	path = oai_ran/ext/simde
+	url = https://github.com/simd-everywhere/simde
